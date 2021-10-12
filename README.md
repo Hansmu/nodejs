@@ -8,3 +8,10 @@ You can enter a Node REPL environment by writing `node` into the command line.
 Can run your own files with `node <file-name>`.
 
 The main file is often named `app.js` or `server.js`.
+
+`server.listen()` enters an event loop. The event loop continues existing until an exit occurs by a 
+hard exit or some other method. `process.exit()` can be used to exit the event loop, but you wouldn't 
+really call it from your code.
+
+The incoming data is sent as a stream of data. A stream is an on-going process. The data is read in 
+chunks. We can start working on the data before all of it has been read.
