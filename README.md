@@ -14,4 +14,6 @@ hard exit or some other method. `process.exit()` can be used to exit the event l
 really call it from your code.
 
 The incoming data is sent as a stream of data. A stream is an on-going process. The data is read in 
-chunks. We can start working on the data before all of it has been read.
+chunks. We can start working on the data before all of it has been read. You can use a
+buffer to read that data. A buffer is like a bus stop. It takes a couple of chunks and
+releases them after it is done. You work with the buffer.

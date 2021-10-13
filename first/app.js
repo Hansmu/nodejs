@@ -25,7 +25,7 @@ function requestListener(
     }
 
     if (url === '/message' && method === 'POST') {
-        return handleMessage(response);
+        return handleMessage(request, response);
     }
 }
 
@@ -51,8 +51,21 @@ function firstResponse(response) {
     return response.end(); // Cannot add anything more after end is called
 }
 
-function handleMessage(response) {
-    fs.writeFileSync('message.txt', 'DUMMY');
+function handleMessage(request, response) {
+    const body = [];
+    // We declare a function for every incoming data piece, so a buffer
+    // Here we are simply declaring listeners. The actual processing is async
+    request.on('data', (chunk) => {
+        body.push(chunk);
+    });
+    // Execute a function once the reading of the data has finished
+    // Here we are simply declaring listeners. The actual processing is async
+    request.on('end', () => {
+        const parsedBody = Buffer.concat(body).toString();
+        // Looks like message=some text
+        const message = parsedBody.split('=')[1];
+        fs.writeFileSync('message.txt', message);
+    });
     response.statusCode = 302;
     response.setHeader('Location', '/');
     return response.end();
