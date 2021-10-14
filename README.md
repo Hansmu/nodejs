@@ -30,6 +30,38 @@ The main file is often named `app.js` or `server.js`.
 
 CommonJS modules are an agreed upon standard for how code modules should be structured.
 
+Each time you `require` a module, it's being run through Node, as you'd expect. What it does,
+however, is add additional features to it. It creates a wrapper around the code that
+you've written and adds additional properties to the code that you can access. It adds
+`exports`, `require`, `module`, `__filename`, `__dirname`. At the end of the module
+execution `module.exports` is returned.
+
+The actual code looks like this.
+
+```
+...
+
+(function (exports, require, module, __filename, __dirname) {
+    function greet() {
+        console.log('Hello');
+    }
+    
+    module.exports = greet;
+});
+
+...
+
+fn (module.exports, require, module, filename, dirname);
+
+...
+
+return module.exports; 
+
+```
+
+
+
+
 
 `server.listen()` enters an event loop. The event loop continues existing until an exit occurs by a 
 hard exit or some other method. `process.exit()` can be used to exit the event loop, but you wouldn't 

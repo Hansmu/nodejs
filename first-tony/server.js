@@ -1,5 +1,4 @@
-const a = 1;
-const b = 2;
-const c = a + b;
+const greet = require('./greet');
 
-console.log(c);
+greet.english();
+greet.spanish();
