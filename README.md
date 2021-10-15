@@ -75,6 +75,21 @@ However, JS doesn't actually have the concept of events, though, so the library'
 structure of these is like the code in our `emitter.js`. The actual code is a lot more complex and safer,
 though.
 
+Inside of Node we have the V8 engine. V8 is synchronous. Inside of Node we have libuv, that's made to
+handle events on the lower level in the operating system. It contains a queue and event loop. The OS puts
+a finished event into the queue for the event loop to handle. The loop allows for libuv to constantly 
+check the queue if anything has finished. If libuv sees that something has completed, then it processes
+the event by calling a callback that's passed from V8.
+
+![diagram](event-loop.PNG)
+
+Buffer - a temporary holding spot for data being moved from one place to another. Intentionally limited
+in size.
+
+Stream - a sequence of data made available over time. Pieces of data that eventually combine into a whole.
+
+Buffers and streams are often combined. Data from a stream is collected into a buffer, then processed. 
+Then another chunk comes into the buffer and repeat.
 
 `server.listen()` enters an event loop. The event loop continues existing until an exit occurs by a 
 hard exit or some other method. `process.exit()` can be used to exit the event loop, but you wouldn't 
