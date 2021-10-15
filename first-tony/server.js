@@ -1,5 +1,12 @@
 const greet = require('./greet');
-require('./import-examples');
 
 greet.english();
 greet.spanish();
+
+console.log('----------------------------------------------');
+
+require('./import-examples');
+
+console.log('----------------------------------------------');
+
+require('./event-emitter-demo');

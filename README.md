@@ -65,6 +65,15 @@ pattern of how our code is being wrapped in the above code section. If you do `e
 won't work, because you're changing the object value inside a function and that doesn't work. It's just
 better to use `module.exports` instead of `exports` to avoid potential pitfalls.
 
+Event - something that has happened in our app that we can respond to. In Node we actually talk about two
+different kinds of events. One of the events come from system events. These are coming from the Node C++
+Core from libuv. E.g. I finished reading a file. Things that Javascript doesn't have. The second set of
+events are the custom events that are coming from the Javascript core. This is coming from an Event Emitter.
+So C++ libuv and JS Core event emitter are the two event types. A lot of the times JS wraps libuv. 
+
+However, JS doesn't actually have the concept of events, though, so the library's faking events. The inner
+structure of these is like the code in our `emitter.js`. The actual code is a lot more complex and safer,
+though.
 
 
 `server.listen()` enters an event loop. The event loop continues existing until an exit occurs by a 
