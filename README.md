@@ -59,7 +59,11 @@ return module.exports;
 
 ```
 
-
+`exports` is the same object as `module.exports`. However, the same export patterns do not work with
+`exports` as it does with `module.exports`. You can easily see the problem when looking at the code
+pattern of how our code is being wrapped in the above code section. If you do `exports = ...` then it
+won't work, because you're changing the object value inside a function and that doesn't work. It's just
+better to use `module.exports` instead of `exports` to avoid potential pitfalls.
 
 
 
