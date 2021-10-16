@@ -118,3 +118,7 @@ really call it from your code.
 When you run your Node app, then your code gets translated into machine code. If you 
 make changes, then you have to reboot, because the code hasn't been compiled into new
 machine code.
+
+Serialize - translating an object into a format that can be stored or transferred. 
+JSON, CSV, XML, and others are popular. 'Deserialize' is the opposite (convering
+the format back into an object).
