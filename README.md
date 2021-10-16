@@ -11,12 +11,12 @@ program that converts Javascript code into something the computer processor can 
 should follow the ECMAScript standard on how the language should work and what features it should have.
 
 What does Javascript need to manage a server?
-* Better ways to organize our code into reusable parts
-* Ways to deal with files
+* Better ways to organize our code into reusable parts (Modules)
+* Ways to deal with files (Node C++ additions and streams)
 * Ways to deal with databases
 * The ability to communicate over the Internet
 * The ability to accept requests and send responses
-* A way to deal with work that takes a long time
+* A way to deal with work that takes a long time (Streams)
 
 The above problems are issues that Javascript doesn't solve. At least not in vanilla. Node, however, does.
 
@@ -109,11 +109,12 @@ In Node you pipe from a Readable stream to a Writable stream.
 We should always aim to use a stream, so as to minimize the amount of memory our application
 is using. Always tend towards asynchronous and streams.
 
+Data is transferred in packets and Node chooses to interpret that as a stream. 
+
 `server.listen()` enters an event loop. The event loop continues existing until an exit occurs by a 
 hard exit or some other method. `process.exit()` can be used to exit the event loop, but you wouldn't 
 really call it from your code.
 
-The incoming data is sent as a stream of data. A stream is an on-going process. The data is read in 
-chunks. We can start working on the data before all of it has been read. You can use a
-buffer to read that data. A buffer is like a bus stop. It takes a couple of chunks and
-releases them after it is done. You work with the buffer.
+When you run your Node app, then your code gets translated into machine code. If you 
+make changes, then you have to reboot, because the code hasn't been compiled into new
+machine code.
