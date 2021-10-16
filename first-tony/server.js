@@ -10,3 +10,7 @@ require('./import-examples');
 console.log('----------------------------------------------');
 
 require('./event-emitter-demo');
+
+console.log('----------------------------------------------');
+
+require('./buffer-examples');

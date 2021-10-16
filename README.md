@@ -91,6 +91,24 @@ Stream - a sequence of data made available over time. Pieces of data that eventu
 Buffers and streams are often combined. Data from a stream is collected into a buffer, then processed. 
 Then another chunk comes into the buffer and repeat.
 
+A buffer turns the data into binary. When printing it out, then it'll be in hexadecimal
+notation for easier reading. We have buffers because regular JS used to not have ways 
+of dealing with raw binary data, but with ES6 it has appeared.
+
+Chunk - a piece of data being sent through a stream. Data is split in chunks and streamed.
+
+A lot of elements inside of Node are built on event emitters. Stream is one of those
+things. Stream has a bunch of subtypes that serve different purposes. Readable, writable etc.
+Their readability or writability is from Node's perspective. A stream directed from the
+browser to the server is of type readable, while the response directed from the Node
+server to the browser is writable.
+
+Pipe - connecting two streams by writing to one stream what is being read from another.
+In Node you pipe from a Readable stream to a Writable stream.
+
+We should always aim to use a stream, so as to minimize the amount of memory our application
+is using. Always tend towards asynchronous and streams.
+
 `server.listen()` enters an event loop. The event loop continues existing until an exit occurs by a 
 hard exit or some other method. `process.exit()` can be used to exit the event loop, but you wouldn't 
 really call it from your code.
