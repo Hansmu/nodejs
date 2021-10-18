@@ -1,6 +1,8 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 // Built in handler for static files. Specify the URL and where to direct it to.
 app.use('/assets', express.static(__dirname + '/public'));
@@ -16,7 +18,8 @@ app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
     res.render('index', {
-        ID: 'Bananas' //Second parameter are the params that are passed to the template engine
+        ID: 'Bananas', //Second parameter are the params that are passed to the template engine,
+        queryString: req.query.queryString //Query string
     }); // Can omit the extension as it's defined with the view engine
 });
 
@@ -36,6 +39,12 @@ app.get('/test', (req, res) => {
 
 app.get('/person/:id', (req, res) => {
     res.send('<html><head></head><body><h1>Person: ' + req.params.id + '</h1></body></html>');
+});
+
+// The second parameter is a handler. Could also add it as a middleware
+app.post('/person', urlencodedParser, (req, res) => {
+    res.send('Thank you!');
+    console.log(req.body.firstName);
 });
 
 app.get('/api', (req, res) => {

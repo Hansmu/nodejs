@@ -6,5 +6,12 @@
 <h1>
     Hello world! <%= ID + '('+ ID.length + ')'%> <!-- Since this is JS, you can put JS code inside of the tags -->
 </h1>
+<h2>
+    Query string: <%= queryString %>
+</h2>
+<form method="POST" action="/person">
+    First name: <input type="text" id="firstName" name="firstName"/>
+    <input type="submit" />
+</form>
 </body>
 </html>
