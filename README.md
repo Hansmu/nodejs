@@ -133,3 +133,6 @@ will work fine
 When using npm, then a caret (^) means that npm will automatically install a higher
 minor/patch version when they come out. Tilde (~) means that only patch versions will
 be automatically installed.
+
+Middleware - code that sits between two layers of software. In the case of Express,
+sitting between the request and the response.
