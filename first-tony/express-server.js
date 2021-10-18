@@ -11,8 +11,17 @@ app.use('/', (req, res, next) => {
     next(); // Continue
 });
 
-// A simpler way of mapping HTTP verbs
+// By default Express looks for the templates in a folder called views. Looks for files with the extension .ejs
+app.set('view engine', 'ejs');
+
 app.get('/', (req, res) => {
+    res.render('index', {
+        ID: 'Bananas' //Second parameter are the params that are passed to the template engine
+    }); // Can omit the extension as it's defined with the view engine
+});
+
+// A simpler way of mapping HTTP verbs
+app.get('/test', (req, res) => {
     res.send(
         '<html>' +
             '<head>' +
