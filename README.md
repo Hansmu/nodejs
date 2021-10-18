@@ -136,3 +136,7 @@ be automatically installed.
 
 Middleware - code that sits between two layers of software. In the case of Express,
 sitting between the request and the response.
+
+Router can be used to nest routes.
+
+To connect to a DB, first find a driver for your specific database.
