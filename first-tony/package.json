@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon express-server.js",
+    "startVanilla": "nodemon server.js",
     "startStream": "node stream-example"
   },
   "keywords": [],
