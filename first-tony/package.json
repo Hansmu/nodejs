@@ -4,10 +4,18 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "startStream": "node stream-example"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "4.17.1",
+    "moment": "2.29.1"
+  },
+  "devDependencies": {
+    "jasmine-node": "3.0.0",
+    "nodemon": "2.0.13"
+  }
 }

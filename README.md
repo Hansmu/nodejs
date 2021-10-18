@@ -14,8 +14,8 @@ What does Javascript need to manage a server?
 * Better ways to organize our code into reusable parts (Modules)
 * Ways to deal with files (Node C++ additions and streams)
 * Ways to deal with databases
-* The ability to communicate over the Internet
-* The ability to accept requests and send responses
+* The ability to communicate over the Internet (startServer request, response)
+* The ability to accept requests and send responses (startServer request, response)
 * A way to deal with work that takes a long time (Streams)
 
 The above problems are issues that Javascript doesn't solve. At least not in vanilla. Node, however, does.
@@ -120,5 +120,16 @@ make changes, then you have to reboot, because the code hasn't been compiled int
 machine code.
 
 Serialize - translating an object into a format that can be stored or transferred. 
-JSON, CSV, XML, and others are popular. 'Deserialize' is the opposite (convering
+JSON, CSV, XML, and others are popular. 'Deserialize' is the opposite (converting
 the format back into an object).
+
+Semantic versioning follows the pattern MAJOR.MINOR.PATCH (1.7.2). 
+* (PATCH) You increment the patch number if some bugs were fixed. The code will 
+  work fine.
+* (MINOR) You increment the minor number if some new features were added. The code
+will work fine
+* (MAJOR) Big changes. Your code may break.
+
+When using npm, then a caret (^) means that npm will automatically install a higher
+minor/patch version when they come out. Tilde (~) means that only patch versions will
+be automatically installed.
