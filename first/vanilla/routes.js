@@ -22,7 +22,7 @@ function firstResponse(response) {
             '<body>' +
                 '<h1>Hello from the server!</h1>' +
                 '<form action="/message" method="POST" name="firstSentData">' +
-                    '<input type="text" />' +
+                    '<input type="text" name="name"/>' +
                     '<button type="submit">' +
                         'Send' +
                     '</button>' +
