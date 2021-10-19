@@ -13,7 +13,23 @@ app.use((req, res, next) => {
     next(); // Tells the request to travel on to the next middleware
 });
 
-app.use(adminRoutes);
+app.use('/admin', adminRoutes); // Add a prefix to your URLs
 app.use(shopRoutes);
+
+// Add a 404 handler. use handles all requests coming in.
+app.use((req, res, next) => {
+    const content = (
+        '<html>' +
+            '<head>' +
+                '<title>Not found</title>' +
+            '</head>' +
+            '<body>' +
+                '<h1>Path not found</h1>' +
+            '</body>' +
+        '</html>'
+    );
+
+    res.status(404).send(content);
+});
 
 app.listen(port);

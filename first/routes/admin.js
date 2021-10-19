@@ -9,7 +9,7 @@ router.get('/add-product', (req, res) => {
                 '<title>Add Product</title></head>' +
             '<body>' +
                 '<h1>Add a new product</h1>' +
-                    '<form action="/product" method="POST" name="addProduct">' +
+                    '<form action="/admin/product" method="POST" name="addProduct">' +
                         '<input type="text" name="title"/>' +
                         '<button type="submit">' +
                             'Send' +
@@ -22,7 +22,7 @@ router.get('/add-product', (req, res) => {
 
 router.post('/product', (req, res) => {
     console.log(req.body);
-    res.redirect('/add-product');
+    res.redirect('/admin/add-product');
 });
 
 module.exports = router;
