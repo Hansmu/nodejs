@@ -10,17 +10,17 @@ const {rootPath} = require("./utils/path-utils");
 const app = express();
 const port = 3030;
 
-const TEMPLATE_EXTENSION = 'hbs';
+const TEMPLATE_EXTENSION = 'ejs';
 
 // The name defines the extension. If it was hbs, then you could use .hbs files
-app.engine(
-    TEMPLATE_EXTENSION,
-    expressHandlebars({
-        layoutsDir: 'views/layouts/', // This would be the default
-        defaultLayout: 'main-layout', // Has to have a main-layout folder in the layouts folder,
-        extname: TEMPLATE_EXTENSION
-    })
-);
+// app.engine(
+//     TEMPLATE_EXTENSION,
+//     expressHandlebars({
+//         layoutsDir: 'views/layouts/', // This would be the default
+//         defaultLayout: 'main-layout', // Has to have a main-layout folder in the layouts folder,
+//         extname: TEMPLATE_EXTENSION
+//     })
+// );
 app.set('view engine', TEMPLATE_EXTENSION);
 
 // app.set('view engine', 'pug'); // Pug support is built in, so only need the library. Handlebars, however, does not have default support.
@@ -40,7 +40,8 @@ app.use(shopRoutes);
 // Add a 404 handler. use handles all requests coming in.
 app.use((req, res, next) => {
     res.status(404).render('404', {
-        pageTitle: 'Not found'
+        pageTitle: 'Not found',
+        path: '/404'
     });
 });
 
