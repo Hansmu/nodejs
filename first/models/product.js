@@ -5,14 +5,17 @@ const {rootPath} = require("../utils/path-utils");
 const productsPath = path.join(rootPath, 'data', 'products.json');
 
 class Product {
-    constructor(title) {
+    constructor(title, imageUrl, description, price) {
         this.title = title;
+        this.imageUrl = imageUrl;
+        this.description = description;
+        this.price = price;
     }
 
     save() {
         getProductsFromFile(products => {
             products.push(this);
-            fs.writeFile(productsPath, JSON.stringify(products));
+            fs.writeFile(productsPath, JSON.stringify(products), () => {});
         });
         return this;
     }

@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const expressHandlebars = require('express-handlebars');
 
-const {adminRoutes, products} = require('./routes/admin');
+const {adminRoutes} = require('./routes/admin');
 const shopRoutes = require('./routes/shop')
 const {get404} = require("./controllers/error");
 const {rootPath} = require("./utils/path-utils");
