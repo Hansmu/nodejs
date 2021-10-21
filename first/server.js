@@ -5,6 +5,7 @@ const expressHandlebars = require('express-handlebars');
 
 const {adminRoutes, products} = require('./routes/admin');
 const shopRoutes = require('./routes/shop')
+const {get404} = require("./controllers/error");
 const {rootPath} = require("./utils/path-utils");
 
 const app = express();
@@ -38,11 +39,6 @@ app.use('/admin', adminRoutes); // Add a prefix to your URLs
 app.use(shopRoutes);
 
 // Add a 404 handler. use handles all requests coming in.
-app.use((req, res, next) => {
-    res.status(404).render('404', {
-        pageTitle: 'Not found',
-        path: '/404'
-    });
-});
+app.use(get404);
 
 app.listen(port);
