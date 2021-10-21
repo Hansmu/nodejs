@@ -8,9 +8,13 @@ const router = express.Router(); // Router creates like a mini Express app that 
 
 router.get('/', shopController.getIndex);
 
-router.get('/products', shopController.getProducts);
+router.get('/products', shopController.getProducts)
+
+router.get('/products/:productId', shopController.getProduct);
 
 router.get('/cart', shopController.getCart);
+
+router.post('/cart', shopController.postCart);
 
 router.get('/orders', shopController.getOrders);
 

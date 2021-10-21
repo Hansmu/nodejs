@@ -140,3 +140,8 @@ sitting between the request and the response.
 Router can be used to nest routes.
 
 To connect to a DB, first find a driver for your specific database.
+
+The URLs work in the order that you define them. If you have clashing URLs, then the
+first one that is defined will be used. So for example `shop/:shopId` and `shop/cart`.
+The one without the ID has to be defined first, so that the clash would be solved in
+the correct order, otherwise the URL with the ID will be matched instead.
