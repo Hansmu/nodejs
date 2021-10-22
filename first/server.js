@@ -8,6 +8,15 @@ const shopRoutes = require('./routes/shop')
 const {get404} = require("./controllers/error");
 const {rootPath} = require("./utils/path-utils");
 
+const {Product} = require('./models/product');
+const User = require('./models/user');
+const Cart = require('./models/cart');
+const CartItem = require('./models/cart-item');
+const Order = require('./models/order');
+const OrderItem = require('./models/order-item');
+
+const { db } = require('./utils/database');
+
 const app = express();
 const port = 3030;
 
@@ -35,10 +44,34 @@ app.use((req, res, next) => {
     next(); // Tells the request to travel on to the next middleware
 });
 
+app.use((req, res, next) => {
+    User.findById(1)
+        .then(user => {
+            req.user = user; // Add a user to the request object
+            next();
+        })
+        .catch(err => console.log(err));
+});
+
 app.use('/admin', adminRoutes); // Add a prefix to your URLs
 app.use(shopRoutes);
 
 // Add a 404 handler. use handles all requests coming in.
 app.use(get404);
 
-app.listen(port);
+Product.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
+User.hasMany(Product);
+User.hasOne(Cart);
+Cart.belongsTo(User);
+Cart.belongsToMany(Product, { through: CartItem }); // through defines the many-to-many table connector
+Product.belongsToMany(Cart, { through: CartItem });
+Order.belongsTo(User);
+User.hasMany(Order);
+Order.belongsToMany(Product, { through: OrderItem });
+
+db.sync() // To sync our models with the DB structure, so to create table structures.
+    .then(result => {
+        // console.log(result);
+        app.listen(port);
+    })
+    .catch(err => console.log(err));
