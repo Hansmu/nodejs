@@ -145,3 +145,8 @@ The URLs work in the order that you define them. If you have clashing URLs, then
 first one that is defined will be used. So for example `shop/:shopId` and `shop/cart`.
 The one without the ID has to be defined first, so that the clash would be solved in
 the correct order, otherwise the URL with the ID will be matched instead.
+
+Cookies can be set using `req.setHeader('Set-Cookie', 'whateverKey=whateverValue');`
+Cookies can be edited by users, however, so choose wisely what you put into it. Usually
+it should just hold the session hash. It's hashed with a secret key that's setup on the
+backend side.

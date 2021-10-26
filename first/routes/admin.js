@@ -2,19 +2,24 @@ const path = require('path');
 
 const {Router} = require('express');
 
-const {getAddProduct, getProducts, postAddProduct} = require('../controllers/admin');
+const adminController = require('../controllers/admin');
 
 const router = Router(); // Router creates like a mini Express app that communicates with the other apps
 
 // /admin/add-product => GET
-router.get('/add-product', getAddProduct);
+router.get('/add-product', adminController.getAddProduct);
 
 // /admin/products => GET
-router.get('/products', getProducts);
+router.get('/products', adminController.getProducts);
 
 // /admin/add-product => POST
-router.post('/add-product', postAddProduct);
+router.post('/add-product', adminController.postAddProduct);
 
-module.exports = {
-    adminRoutes: router
-};
+router.get('/edit-product/:productId', adminController.getEditProduct);
+
+router.post('/edit-product', adminController.postEditProduct);
+
+router.post('/delete-product', adminController.postDeleteProduct);
+
+module.exports = router;
+

@@ -2,9 +2,9 @@ const path = require('path');
 
 const express = require('express');
 
-const shopController = require('../controllers/shop');
-
 const router = express.Router(); // Router creates like a mini Express app that communicates with the other apps
+
+const shopController = require('../controllers/shop');
 
 router.get('/', shopController.getIndex);
 

@@ -2,9 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const expressHandlebars = require('express-handlebars');
+const mongoose = require('mongoose');
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 
 const {adminRoutes} = require('./routes/admin');
-const shopRoutes = require('./routes/shop')
+const shopRoutes = require('./routes/shop');
+const authRoutes = require('./routes/auth');
 const {get404} = require("./controllers/error");
 const {rootPath} = require("./utils/path-utils");
 
@@ -17,10 +21,18 @@ const OrderItem = require('./models/order-item');
 
 const { db } = require('./utils/database');
 
+const MONGODB_URI =
+    'mongodb+srv://maximilian:9u4biljMQc4jjqbe@cluster0-ntrwp.mongodb.net/shop';
+
 const app = express();
 const port = 3030;
 
 const TEMPLATE_EXTENSION = 'ejs';
+
+const store = new MongoDBStore({
+    uri: MONGODB_URI,
+    collection: 'sessions'
+});
 
 // The name defines the extension. If it was hbs, then you could use .hbs files
 // app.engine(
@@ -39,6 +51,14 @@ app.set('view engine', TEMPLATE_EXTENSION);
 // You can add multiple static file locations and it'll funnel through all of them until it gets a hit.
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false })); // Parse form data. extended false avoids parsing non-default features.
+app.use(
+    session({
+        secret: 'my secret',
+        resave: false,
+        saveUninitialized: false,
+        store: store
+    })
+);
 
 app.use((req, res, next) => {
     next(); // Tells the request to travel on to the next middleware
@@ -69,9 +89,30 @@ Order.belongsTo(User);
 User.hasMany(Order);
 Order.belongsToMany(Product, { through: OrderItem });
 
-db.sync() // To sync our models with the DB structure, so to create table structures.
+// db.sync() // To sync our models with the DB structure, so to create table structures.
+//     .then(result => {
+//         // console.log(result);
+//         app.listen(port);
+//     })
+//     .catch(err => console.log(err));
+
+mongoose
+    .connect(MONGODB_URI)
     .then(result => {
-        // console.log(result);
+        User.findOne().then(user => {
+            if (!user) {
+                const user = new User({
+                    name: 'Max',
+                    email: 'max@test.com',
+                    cart: {
+                        items: []
+                    }
+                });
+                user.save();
+            }
+        });
         app.listen(port);
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+        console.log(err);
+    });
