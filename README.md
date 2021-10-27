@@ -150,3 +150,8 @@ Cookies can be set using `req.setHeader('Set-Cookie', 'whateverKey=whateverValue
 Cookies can be edited by users, however, so choose wisely what you put into it. Usually
 it should just hold the session hash. It's hashed with a secret key that's setup on the
 backend side.
+
+You can add a middleware for authentication. You can chain multiple middleware in your routes.
+So for example `router.get('/add-product', isAuthenticated, isAllowed, getAddProduct);`
+
+`res.locals` is a group of parameters that exist only on the views that are rendered.
