@@ -155,3 +155,7 @@ You can add a middleware for authentication. You can chain multiple middleware i
 So for example `router.get('/add-product', isAuthenticated, isAllowed, getAddProduct);`
 
 `res.locals` is a group of parameters that exist only on the views that are rendered.
+
+`express-validator` can be used for validation. `validationResult`, that's imported, can be
+used to access the validation errors. You add the checks as middleware to the router endpoint.
+Async validation can be used by returning a promise.
