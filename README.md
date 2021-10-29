@@ -164,3 +164,6 @@ If you use `next()` with an error, then the error will go to an error handling m
 a middleware with 4 arguments. If you have several, then the first come, first served model applies
 to them as well. If you throw an error outside a promise, then you don't have to use `next()`, if
 inside, then you do in order for the error to reach the error handling middleware.
+
+`multer` can be used to process sent files. `multipart/form-data` specifies that a form contains mixed
+data - binary and text.

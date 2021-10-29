@@ -51,6 +51,33 @@ app.set('view engine', TEMPLATE_EXTENSION);
 // You can add multiple static file locations and it'll funnel through all of them until it gets a hit.
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false })); // Parse form data. extended false avoids parsing non-default features.
+
+const fileStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'images');
+    },
+    filename: (req, file, cb) => {
+        cb(null, new Date().toISOString() + '-' + file.originalname);
+    }
+});
+
+const fileFilter = (req, file, cb) => {
+    if (
+        file.mimetype === 'image/png' ||
+        file.mimetype === 'image/jpg' ||
+        file.mimetype === 'image/jpeg'
+    ) {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
+};
+
+app.use(
+    multer({ storage: fileStorage, fileFilter: fileFilter }).single('image') // image is the field name
+);
+
+
 app.use(
     session({
         secret: 'my secret',
