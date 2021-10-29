@@ -159,3 +159,8 @@ So for example `router.get('/add-product', isAuthenticated, isAllowed, getAddPro
 `express-validator` can be used for validation. `validationResult`, that's imported, can be
 used to access the validation errors. You add the checks as middleware to the router endpoint.
 Async validation can be used by returning a promise.
+
+If you use `next()` with an error, then the error will go to an error handling middleware. It's
+a middleware with 4 arguments. If you have several, then the first come, first served model applies
+to them as well. If you throw an error outside a promise, then you don't have to use `next()`, if
+inside, then you do in order for the error to reach the error handling middleware.
