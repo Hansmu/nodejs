@@ -167,3 +167,11 @@ inside, then you do in order for the error to reach the error handling middlewar
 
 `multer` can be used to process sent files. `multipart/form-data` specifies that a form contains mixed
 data - binary and text.
+
+`res.status(200).json()` to send back a JSON response.
+
+CORS errors can only be solved on the server, not on the client side. Use a middleware to help
+with CORS. `res.setHeader('Access-Control-Allow-Origin', 'some.url.com');` to lock down to a specific URL.
+`res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');` to allow only certain
+HTTP verbs. `res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');` to allow only
+certain headers.
