@@ -175,3 +175,6 @@ with CORS. `res.setHeader('Access-Control-Allow-Origin', 'some.url.com');` to lo
 `res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');` to allow only certain
 HTTP verbs. `res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');` to allow only
 certain headers.
+
+async/awaits allows writing asynchronous requests in a synchronous way. It looks synchronous, but isn't
+in how it behaves. It isn't blocking for the main thread.
