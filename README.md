@@ -178,3 +178,7 @@ certain headers.
 
 async/awaits allows writing asynchronous requests in a synchronous way. It looks synchronous, but isn't
 in how it behaves. It isn't blocking for the main thread.
+
+socket.io can be used to work with websockets in an easier manner. You have to subscribe to the socket.
+Then you'll start listening for events on a channel. `io.on('someChannel', {someProperty: 'someValue'});`.
+An alternative library could be `express-ws`.
