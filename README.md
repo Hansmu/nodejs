@@ -182,3 +182,15 @@ in how it behaves. It isn't blocking for the main thread.
 socket.io can be used to work with websockets in an easier manner. You have to subscribe to the socket.
 Then you'll start listening for events on a channel. `io.on('someChannel', {someProperty: 'someValue'});`.
 An alternative library could be `express-ws`.
+
+GraphQL can be used to partially query data from the backend. You have a resolver and then a schema.
+The schema defines the model, while the resolver actually makes it work. Essentially GraphQL filters
+the object down to a smaller form so less data is passed over the wire. Most of the time, you don't
+need the same amount of fields in different queries, so it helps limit the amount of pointless overhead
+with each query. OPTIONS query can cause issues with GraphQL so need to handle OPTIONS separately.
+
+Remember to set the production flag to true in the process environments to make sure the app gets
+optimized for production. Helmet is a useful middleware to add for security. Morgan can be used for
+logging requests.
+
+Node cannot run TS code, so you have to compile it to JS first.
